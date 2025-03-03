@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "258684727901",
+    "project_id": "maache-weather-app",
+    "storage_bucket": "maache-weather-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:258684727901:android:b1c4ed736138424fd1d3b4",
+        "android_client_info": {
+          "package_name": "com.example.maache_weather_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_taj-NE9d7N41cVzdOgEyOr8tq9Xa7MU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
