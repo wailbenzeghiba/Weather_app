@@ -177,7 +177,7 @@ class _SettingsState extends State<Settings> {
                     await _notifService.scheduleNotification(
                       id: id + 1,
                       title: cityName,
-                      body: '$cityCondition $cityTemp',
+                      body: '$cityCondition                              $cityTemp°C',
                       hour: time.hour,
                       minute: time.minute,
                     );
