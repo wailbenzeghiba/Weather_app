@@ -1,4 +1,3 @@
-// ignore_for_file: file_names, avoid_print
 import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
 import 'package:maache_weather_app/models/weather_model.dart';
@@ -22,31 +21,26 @@ class _WeatherpageState extends State<Weatherpage> {
   @override
   void initState() {
     super.initState();
-    print('initState called'); // Debug print
     _fetchWeather();
   }
 
   //fetch weather
   Future<void> _fetchWeather() async {
     try {
-      print('Fetching weather...'); // Debug print
       //get city 
       String cityName = await _weatherService.getCurrentCity();
-      print('City Name: $cityName'); // Debug print
 
       // Update the city name in the provider
       Provider.of<CityProvider>(context, listen: false).setCityName(cityName);
 
       //get city weather
       final weatherModel = await _weatherService.getWeather(cityName);
-      print('Weather Data: ${weatherModel.cityName}, ${weatherModel.temperature}'); // Debug print
       Provider.of<CityProvider>(context, listen: false).setCityTemp(weatherModel.temperature.toString());
-      Provider.of<CityProvider>(context, listen: false).setCityTemp(weatherModel.condition);
+      Provider.of<CityProvider>(context, listen: false).setCityCondition(weatherModel.condition);
       setState(() {
         _weatherModel = weatherModel;
       });
     } catch (e) {
-      print('Error fetching weather: $e');
     }
   }
 

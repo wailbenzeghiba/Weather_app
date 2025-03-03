@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, avoid_print
 import 'package:maache_weather_app/pages/presets/ScheduleProvider.dart';
 import 'package:maache_weather_app/pages/presets/city_provider.dart';
 import 'package:maache_weather_app/pages/presets/notification_provider.dart';
@@ -28,10 +28,9 @@ class _SettingsState extends State<Settings> {
     super.initState();
     isDarkMode = Provider.of<ThemeProvider>(context, listen: false).isSwitched;
     isNotificationsOn = Provider.of<NotificationProvider>(context, listen: false).isNotifOn;
-    print('Settings initialized: isDarkMode=$isDarkMode, isNotificationsOn=$isNotificationsOn');
+    time = Provider.of<Scheduleprovider>(context, listen: false).time;
     _initializeNotificationService();
   }
-  
 
   Future<void> _initializeNotificationService() async {
     await _notifService.initNotification();
@@ -159,11 +158,12 @@ class _SettingsState extends State<Settings> {
                 onPressed: () async {
                   final TimeOfDay? picked = await showTimePicker(
                     context: context,
-                    initialTime: Provider.of<Scheduleprovider>(context, listen: false).time,
+                    initialTime: time,
                   );
                   if (picked != null && picked != time) {
                     setState(() {
                       time = picked;
+                      Provider.of<Scheduleprovider>(context, listen: false).setscheduleTime(time);
                     });
 
                     final cityName = Provider.of<CityProvider>(context, listen: false).cityName;
@@ -177,7 +177,7 @@ class _SettingsState extends State<Settings> {
                     await _notifService.scheduleNotification(
                       id: id + 1,
                       title: cityName,
-                      body: '$cityCondition' + ' ' +  '$cityTemp',
+                      body: '$cityCondition $cityTemp',
                       hour: time.hour,
                       minute: time.minute,
                     );
